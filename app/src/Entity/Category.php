@@ -9,6 +9,7 @@ use App\Repository\CategoryRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Class Category.
@@ -37,6 +38,7 @@ class Category
      * @var DateTimeImmutable|null
      */
     #[ORM\Column(type: 'datetime_immutable')]
+    #[Gedmo\Timestampable(on: 'create')]
     private ?DateTimeImmutable $createdAt;
 
     /**
@@ -45,6 +47,7 @@ class Category
      * @var DateTimeImmutable|null
      */
     #[ORM\Column(type: 'datetime_immutable')]
+    #[Gedmo\Timestampable(on: 'update')]
     private ?DateTimeImmutable $updatedAt;
 
     /**
