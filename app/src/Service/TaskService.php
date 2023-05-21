@@ -1,11 +1,11 @@
 <?php
-
 /**
  * Task service.
  */
 
 namespace App\Service;
 
+use App\Entity\Task;
 use App\Repository\TaskRepository;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -28,8 +28,8 @@ class TaskService implements TaskServiceInterface
     /**
      * Constructor.
      *
-     * @param TaskRepository $taskRepository Task repository
-     * @param PaginatorInterface $paginator Paginator
+     * @param TaskRepository     $taskRepository Task repository
+     * @param PaginatorInterface $paginator      Paginator
      */
     public function __construct(TaskRepository $taskRepository, PaginatorInterface $paginator)
     {
@@ -52,4 +52,25 @@ class TaskService implements TaskServiceInterface
             TaskRepository::PAGINATOR_ITEMS_PER_PAGE
         );
     }
+
+    /**
+     * Save entity.
+     *
+     * @param Task $task Task entity
+     */
+    public function save(Task $task): void
+    {
+        $this->taskRepository->save($task);
+    }
+
+    /**
+     * Delete entity.
+     *
+     * @param Task $task Task entity
+     */
+    public function delete(Task $task): void
+    {
+        $this->taskRepository->delete($task);
+    }
+
 }

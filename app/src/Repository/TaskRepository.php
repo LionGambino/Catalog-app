@@ -8,6 +8,8 @@ namespace App\Repository;
 use App\Entity\Category;
 use App\Entity\Task;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -20,8 +22,6 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Task[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  *
  * @extends ServiceEntityRepository<Task>
- *
- * @psalm-suppress LessSpecificImplementedReturnType
  */
 class TaskRepository extends ServiceEntityRepository
 {
@@ -54,19 +54,12 @@ class TaskRepository extends ServiceEntityRepository
     public function queryAll(): QueryBuilder
     {
         return $this->getOrCreateQueryBuilder()
+            ->select(
+                'partial task.{id, createdAt, updatedAt, title}',
+                'partial category.{id, title}'
+            )
+            ->join('task.category', 'category')
             ->orderBy('task.updatedAt', 'DESC');
-    }
-
-    /**
-     * Get or create new query builder.
-     *
-     * @param QueryBuilder|null $queryBuilder Query builder
-     *
-     * @return QueryBuilder Query builder
-     */
-    private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
-    {
-        return $queryBuilder ?? $this->createQueryBuilder('task');
     }
 
     /**
@@ -89,4 +82,39 @@ class TaskRepository extends ServiceEntityRepository
             ->getQuery()
             ->getSingleScalarResult();
     }
+
+    /**
+     * Save entity.
+     *
+     * @param Task $task Task entity
+     */
+    public function save(Task $task): void
+    {
+        $this->_em->persist($task);
+        $this->_em->flush();
+    }
+
+    /**
+     * Delete entity.
+     *
+     * @param Task $task Task entity
+     */
+    public function delete(Task $task): void
+    {
+        $this->_em->remove($task);
+        $this->_em->flush();
+    }
+
+    /**
+     * Get or create new query builder.
+     *
+     * @param QueryBuilder|null $queryBuilder Query builder
+     *
+     * @return QueryBuilder Query builder
+     */
+    private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
+    {
+        return $queryBuilder ?? $this->createQueryBuilder('task');
+    }
+
 }
