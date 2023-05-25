@@ -15,7 +15,7 @@
 <body>
 <section id="navbar">
 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-    <div>{{ app.user.email }}</div>
+    <div><a href="{{ url('user_show', {id: app.user.id}) }}">{{ app.user.email }}</a></div>
     <div>
         <a href="{{ url('app_logout') }}">{{ 'action_logout'|trans }}</a>
     </div>
