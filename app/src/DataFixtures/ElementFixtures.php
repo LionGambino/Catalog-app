@@ -1,22 +1,22 @@
 <?php
 /**
- * Task fixtures.
+ * Element fixtures.
  */
 
 namespace App\DataFixtures;
 
 use App\Entity\Category;
-use App\Entity\Enum\TaskStatus;
+use App\Entity\Enum\ElementStatus;
 use App\Entity\Tag;
-use App\Entity\Task;
+use App\Entity\Element;
 use App\Entity\User;
 use DateTimeImmutable;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 /**
- * Class TaskFixtures.
+ * Class ElementFixtures.
  */
-class TaskFixtures extends AbstractBaseFixtures implements DependentFixtureInterface
+class ElementFixtures extends AbstractBaseFixtures implements DependentFixtureInterface
 {
     /**
      * Load data.
@@ -31,32 +31,32 @@ class TaskFixtures extends AbstractBaseFixtures implements DependentFixtureInter
             return;
         }
 
-        $this->createMany(100, 'tasks', function (int $i) {
-            $task = new Task();
-            $task->setTitle($this->faker->sentence);
-            $task->setCreatedAt(
+        $this->createMany(100, 'elements', function (int $i) {
+            $element = new Element();
+            $element->setTitle($this->faker->sentence);
+            $element->setCreatedAt(
                 DateTimeImmutable::createFromMutable(
                     $this->faker->dateTimeBetween('-100 days', '-1 days')
                 )
             );
-            $task->setUpdatedAt(
+            $element->setUpdatedAt(
                 DateTimeImmutable::createFromMutable(
                     $this->faker->dateTimeBetween('-100 days', '-1 days')
                 )
             );
             /** @var Category $category */
             $category = $this->getRandomReference('categories');
-            $task->setCategory($category);
+            $element->setCategory($category);
 
             /** @var Tag $tag */
             $references = 0;
             while (($references) < 3) {
                 $tag = $this->getRandomReference('tags');
-                $task->addTag($tag);;
+                $element->addTag($tag);;
                 $references=$references+1;
             }
 
-            return $task;
+            return $element;
         });
 
         $this->manager->flush();

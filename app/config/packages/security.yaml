@@ -42,7 +42,6 @@ security:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
         - { path: ^/login, roles: PUBLIC_ACCESS}
-        - { path: ^/task, roles: PUBLIC_ACCESS}
         - { path: ^/, roles: ROLE_USER}
 
 when@test:

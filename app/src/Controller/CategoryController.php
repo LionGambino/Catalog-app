@@ -36,12 +36,12 @@ class CategoryController extends AbstractController
     /**
      * Constructor.
      *
-     * @param CategoryServiceInterface $taskService Task service
+     * @param CategoryServiceInterface $elementService Element service
      * @param TranslatorInterface      $translator  Translator
      */
-    public function __construct(CategoryServiceInterface $taskService, TranslatorInterface $translator)
+    public function __construct(CategoryServiceInterface $elementService, TranslatorInterface $translator)
     {
-        $this->categoryService = $taskService;
+        $this->categoryService = $elementService;
         $this->translator = $translator;
     }
 
@@ -170,7 +170,7 @@ class CategoryController extends AbstractController
         if(!$this->categoryService->canBeDeleted($category)) {
             $this->addFlash(
                 'warning',
-                $this->translator->trans('message.category_contains_tasks')
+                $this->translator->trans('message.category_contains_elements')
             );
 
             return $this->redirectToRoute('category_index');

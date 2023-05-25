@@ -1,12 +1,12 @@
 <?php
 /**
- * Task repository.
+ * Element repository.
  */
 
 namespace App\Repository;
 
 use App\Entity\Category;
-use App\Entity\Task;
+use App\Entity\Element;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
@@ -14,16 +14,16 @@ use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * Class TaskRepository.
+ * Class ElementRepository.
  *
- * @method Task|null find($id, $lockMode = null, $lockVersion = null)
- * @method Task|null findOneBy(array $criteria, array $orderBy = null)
- * @method Task[]    findAll()
- * @method Task[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Element|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Element|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Element[]    findAll()
+ * @method Element[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  *
- * @extends ServiceEntityRepository<Task>
+ * @extends ServiceEntityRepository<Element>
  */
-class TaskRepository extends ServiceEntityRepository
+class ElementRepository extends ServiceEntityRepository
 {
     /**
      * Items per page.
@@ -43,7 +43,7 @@ class TaskRepository extends ServiceEntityRepository
      */
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Task::class);
+        parent::__construct($registry, Element::class);
     }
 
     /**
@@ -55,19 +55,19 @@ class TaskRepository extends ServiceEntityRepository
     {
         return $this->getOrCreateQueryBuilder()
             ->select(
-                'partial task.{id, createdAt, updatedAt, title}',
+                'partial element.{id, createdAt, updatedAt, title}',
                 'partial category.{id, title}'
             )
-            ->join('task.category', 'category')
-            ->orderBy('task.updatedAt', 'DESC');
+            ->join('element.category', 'category')
+            ->orderBy('element.updatedAt', 'DESC');
     }
 
     /**
-     * Count tasks by category.
+     * Count elements by category.
      *
      * @param Category $category Category
      *
-     * @return int Number of tasks in category
+     * @return int Number of elements in category
      *
      * @throws NoResultException
      * @throws NonUniqueResultException
@@ -76,8 +76,8 @@ class TaskRepository extends ServiceEntityRepository
     {
         $qb = $this->getOrCreateQueryBuilder();
 
-        return $qb->select($qb->expr()->countDistinct('task.id'))
-            ->where('task.category = :category')
+        return $qb->select($qb->expr()->countDistinct('element.id'))
+            ->where('element.category = :category')
             ->setParameter(':category', $category)
             ->getQuery()
             ->getSingleScalarResult();
@@ -86,22 +86,22 @@ class TaskRepository extends ServiceEntityRepository
     /**
      * Save entity.
      *
-     * @param Task $task Task entity
+     * @param Element $element Element entity
      */
-    public function save(Task $task): void
+    public function save(Element $element): void
     {
-        $this->_em->persist($task);
+        $this->_em->persist($element);
         $this->_em->flush();
     }
 
     /**
      * Delete entity.
      *
-     * @param Task $task Task entity
+     * @param Element $element Element entity
      */
-    public function delete(Task $task): void
+    public function delete(Element $element): void
     {
-        $this->_em->remove($task);
+        $this->_em->remove($element);
         $this->_em->flush();
     }
 
@@ -114,7 +114,7 @@ class TaskRepository extends ServiceEntityRepository
      */
     private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
     {
-        return $queryBuilder ?? $this->createQueryBuilder('task');
+        return $queryBuilder ?? $this->createQueryBuilder('element');
     }
 
 }

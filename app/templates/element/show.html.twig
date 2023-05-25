@@ -1,26 +1,26 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ 'title.task_details'|trans({'%id%': task.id|default('')}) }}
+    {{ 'title.element_details'|trans({'%id%': element.id|default('')}) }}
 {% endblock %}
 
 {% block body %}
-    <h1>{{ 'title.task_details'|trans({'%id%': task.id|default('')}) }}</h1>
-    {% if task is defined and task|length %}
+    <h1>{{ 'title.element_details'|trans({'%id%': element.id|default('')}) }}</h1>
+    {% if element is defined and element|length %}
         <dl class="dl-horizontal">
             <dt>{{ 'label.id'|trans }}</dt>
-            <dd>{{ task.id }}</dd>
+            <dd>{{ element.id }}</dd>
             <dt>{{ 'label.created_at'|trans }}</dt>
-            <dd>{{ task.createdAt|format_date('long') }}</dd>
+            <dd>{{ element.createdAt|format_date('long') }}</dd>
             <dt>{{ 'label.updated_at'|trans }}</dt>
-            <dd>{{ task.updatedAt|format_date('long') }}</dd>
+            <dd>{{ element.updatedAt|format_date('long') }}</dd>
             <dt>{{ 'label.title'|trans }}</dt>
-            <dd>{{  task.title }}</dd>
+            <dd>{{  element.title }}</dd>
             <dt>{{ 'label.category'|trans }}</dt>
-            <dd>{{  task.category.title }}</dd>
+            <dd>{{  element.category.title }}</dd>
         </dl>
         <p>
-            <a href="{{ url('task_index') }}" title="{{ 'action.back_to_list'|trans }}">
+            <a href="{{ url('element_index') }}" title="{{ 'action.back_to_list'|trans }}">
                 {{ 'action.back_to_list'|trans }}
             </a>
         </p>
