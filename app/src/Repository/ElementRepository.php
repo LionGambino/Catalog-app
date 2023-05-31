@@ -56,9 +56,11 @@ class ElementRepository extends ServiceEntityRepository
         return $this->getOrCreateQueryBuilder()
             ->select(
                 'partial element.{id, createdAt, updatedAt, title}',
-                'partial category.{id, title}'
+                'partial category.{id, title}',
+                'partial tags.{id, title}'
             )
             ->join('element.category', 'category')
+            ->leftJoin('element.tags', 'tags')
             ->orderBy('element.updatedAt', 'DESC');
     }
 

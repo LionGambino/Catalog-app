@@ -22,6 +22,7 @@
                 <th>{{ knp_pagination_sortable(pagination, 'label.updated_at'|trans, 'element.updatedAt') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.title'|trans, 'element.title') }}</th>
                 <th>{{ 'label.category'|trans }}</th>
+                <th>{{ 'label.tags'|trans }}</th>
                 <th colspan="3">{{ 'label.actions'|trans }}</th>
             </tr>
             </thead>
@@ -33,6 +34,11 @@
                     <td>{{ element.updatedAt|format_date('long') }}</td>
                     <td>{{ element.title }}</td>
                     <td>{{ element.category.title }}</td>
+                    <td>
+                        {% for tag in element.tags%}
+                            <span> {{ tag.title }} </span> |
+                        {% endfor %}
+                    </td>
                     <td>
                         <a href="{{ url('element_show', {id: element.id}) }}" title="{{ 'action.show'|trans }}">
                             {{ 'action.show'|trans }}
