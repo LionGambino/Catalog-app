@@ -56,6 +56,14 @@ class ElementFixtures extends AbstractBaseFixtures implements DependentFixtureIn
                 $references=$references+1;
             }
 
+            /** @var User $favourited */
+            $references = 0;
+            while (($references) < 2) {
+                $favourited = $this->getRandomReference('users');
+                $element->addFavourited($favourited);;
+                $references=$references+1;
+            }
+
             return $element;
         });
 

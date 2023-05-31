@@ -82,12 +82,18 @@ class Element
     #[ORM\JoinTable(name: 'elements_tags')]
     private $tags;
 
+    #[Assert\Valid]
+    #[ORM\ManyToMany(targetEntity: User::class, fetch: 'EXTRA_LAZY', orphanRemoval: true)]
+    #[ORM\JoinTable(name: 'elements_favourited')]
+    private Collection $favourited;
+
     /**
      * Constructor.
      */
     public function __construct()
     {
         $this->tags = new ArrayCollection();
+        $this->favourited = new ArrayCollection();
     }
 
     /**
@@ -210,5 +216,39 @@ class Element
     public function removeTag(Tag $tag): void
     {
         $this->tags->removeElement($tag);
+    }
+
+    /**
+     * Getter for favourited.
+     *
+     * @return Collection<int, User> Favourited collection
+     */
+    public function getFavourited(): Collection
+    {
+        return $this->favourited;
+    }
+    /**
+     * Add favourite.
+     *
+     * @param User $favourited User entity
+     */
+    public function addFavourited(User $favourited): self
+    {
+        if (!$this->favourited->contains($favourited)) {
+            $this->favourited->add($favourited);
+        }
+
+        return $this;
+    }
+    /**
+     * Remove favourite.
+     *
+     * @param User $favourited User entity
+     */
+    public function removeFavourited(User $favourited): self
+    {
+        $this->favourited->removeElement($favourited);
+
+        return $this;
     }
 }
