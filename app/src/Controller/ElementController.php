@@ -18,7 +18,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 /**
  * Class ElementController.
  */
-#[Route('/element')]
+#[Route('/')]
 class ElementController extends AbstractController
 {
     /**
