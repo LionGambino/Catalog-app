@@ -18,6 +18,20 @@
             <dd>{{  element.title }}</dd>
             <dt>{{ 'label.category'|trans }}</dt>
             <dd>{{  element.category.title }}</dd>
+            <dt>{{ 'label.tags'|trans }}</dt>
+            <dd>
+                {% for tag in element.tags%}
+                    <span> {{ tag.title }} </span> |
+                {% endfor %}
+            </dd>
+            <dt>{{ 'label_comment'|trans }}</dt>
+            <dd>
+                {% for comment in comments%}
+                    {% if comment.element.id == element.id %}
+                    <p> {{ comment.content|markdown_to_html }} </p>
+                    {% endif %}
+                {% endfor %}
+            </dd>
         </dl>
         <p>
             <a href="{{ url('element_index') }}" title="{{ 'action.back_to_list'|trans }}">

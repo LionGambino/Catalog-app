@@ -7,6 +7,7 @@ namespace App\Controller;
 
 use App\Entity\Element;
 use App\Form\Type\ElementType;
+use App\Repository\CommentRepository;
 use App\Service\ElementServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
@@ -68,9 +69,10 @@ class ElementController extends AbstractController
      * @return Response HTTP response
      */
     #[Route('/{id}', name: 'element_show', requirements: ['id' => '[1-9]\d*'], methods: 'GET')]
-    public function show(Element $element): Response
+    public function show(Element $element, CommentRepository $commentRepository): Response
     {
-        return $this->render('element/show.html.twig', ['element' => $element]);
+        $comments = $commentRepository->findAll();
+        return $this->render('element/show.html.twig', ['element' => $element, 'comments' => $comments]);
     }
 
     /**
