@@ -6,6 +6,7 @@
 namespace App\Service;
 
 use App\Entity\Element;
+use App\Entity\User;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 
 /**
@@ -22,6 +23,18 @@ interface ElementServiceInterface
      * @return PaginationInterface<string, mixed> Paginated list
      */
     public function getPaginatedList(int $page, array $filters = []): PaginationInterface;
+
+    /**
+     * Get paginated list for favourited.
+     *
+     * @param int $page Page number
+     * @param User               $user  Favourited by user
+     * @param array<string, int> $filters Filters array
+     *
+     * @return PaginationInterface<string, mixed> Paginated list
+     */
+    public function getPaginatedListFav(int $page, User $user, array $filters = []): PaginationInterface;
+
     /**
      * Save entity.
      *

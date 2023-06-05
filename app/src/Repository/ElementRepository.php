@@ -8,11 +8,13 @@ namespace App\Repository;
 use App\Entity\Category;
 use App\Entity\Element;
 use App\Entity\Tag;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Class ElementRepository.
@@ -60,13 +62,33 @@ class ElementRepository extends ServiceEntityRepository
             ->select(
                 'partial element.{id, createdAt, updatedAt, title}',
                 'partial category.{id, title}',
-                'partial tags.{id, title}'
+                'partial tags.{id, title}',
+                'partial favourited.{id}'
             )
             ->join('element.category', 'category')
             ->leftJoin('element.tags', 'tags')
+            ->leftJoin('element.favourited', 'favourited')
             ->orderBy('element.updatedAt', 'DESC');
 
         return $this->applyFiltersToList($queryBuilder, $filters);
+    }
+
+    /**
+     * Query elements by favourited.
+     *
+     * @param User         $user    User entity
+     * @param array<string, object> $filters Filters
+     *
+     * @return QueryBuilder Query builder
+     */
+    public function queryByFavourited(User $user, array $filters = []): QueryBuilder
+    {
+        $queryBuilder = $this->queryAll($filters);
+
+        $queryBuilder->andWhere('favourited IN (:user)')
+            ->setParameter('user', $user);
+
+        return $queryBuilder;
     }
 
     /**

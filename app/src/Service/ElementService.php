@@ -6,6 +6,7 @@
 namespace App\Service;
 
 use App\Entity\Element;
+use App\Entity\User;
 use App\Repository\ElementRepository;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -69,6 +70,26 @@ class ElementService implements ElementServiceInterface
 
         return $this->paginator->paginate(
             $this->elementRepository->queryAll($filters),
+            $page,
+            ElementRepository::PAGINATOR_ITEMS_PER_PAGE
+        );
+    }
+
+    /**
+     * Get paginated list for favourited.
+     *
+     * @param int $page Page number
+     * @param User               $user  Favourited by user
+     * @param array<string, int> $filters Filters array
+     *
+     * @return PaginationInterface<string, mixed> Paginated list
+     */
+    public function getPaginatedListFav(int $page, User $user, array $filters = []): PaginationInterface
+    {
+        $filters = $this->prepareFilters($filters);
+
+        return $this->paginator->paginate(
+            $this->elementRepository->queryByFavourited($user,$filters),
             $page,
             ElementRepository::PAGINATOR_ITEMS_PER_PAGE
         );

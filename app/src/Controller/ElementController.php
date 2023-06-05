@@ -6,6 +6,7 @@
 namespace App\Controller;
 
 use App\Entity\Element;
+use App\Entity\User;
 use App\Form\Type\ElementType;
 use App\Repository\CommentRepository;
 use App\Service\ElementServiceInterface;
@@ -75,6 +76,28 @@ class ElementController extends AbstractController
     {
         $comments = $commentRepository->findAll();
         return $this->render('element/show.html.twig', ['element' => $element, 'comments' => $comments]);
+    }
+
+    /**
+     * Show favourited action.
+     *
+     * @param Request $request HTTP Request
+     *
+     * @return Response HTTP response
+     */
+    #[Route('/favourite',name: 'element_favourited', methods: 'GET')]
+    public function favourited(Request $request): Response
+    {
+        $filters = $this->getFilters($request);
+        /** @var User $user */
+        $user = $this->getUser();
+        $pagination = $this->elementService->getPaginatedListFav(
+            $request->query->getInt('page', 1),
+            $user,
+            $filters
+        );
+
+        return $this->render('element/index.html.twig', ['pagination' => $pagination]);
     }
 
     /**
