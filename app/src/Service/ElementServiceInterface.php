@@ -17,11 +17,11 @@ interface ElementServiceInterface
      * Get paginated list.
      *
      * @param int $page Page number
+     * @param array<string, int> $filters Filters array
      *
      * @return PaginationInterface<string, mixed> Paginated list
      */
-    public function getPaginatedList(int $page): PaginationInterface;
-
+    public function getPaginatedList(int $page, array $filters = []): PaginationInterface;
     /**
      * Save entity.
      *

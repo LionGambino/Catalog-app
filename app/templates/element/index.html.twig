@@ -33,11 +33,20 @@
                     <td>{{ element.createdAt|format_date('long') }}</td>
                     <td>{{ element.updatedAt|format_date('long') }}</td>
                     <td>{{ element.title }}</td>
-                    <td>{{ element.category.title }}</td>
                     <td>
-                        {% for tag in element.tags%}
-                            <span> {{ tag.title }} </span> |
-                        {% endfor %}
+                        <a href="{{ url('element_index', {'filters.category_id' : element.category.id}) }}" title="{{ element.category.title }}">
+                            {{ element.category.title }}
+                    </td>
+                    <td>
+                        {% if element.tags is defined and element.tags|length %}
+                            {% for tag in element.tags %}
+                                <a class="btn btn-outline-primary" href="{{ url('element_index', {'filters.tag_id' : tag.id}) }}" title="{{ tag.title }}">
+                                    {{ tag.title }}
+                                </a>
+                            {% endfor %}
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
                     </td>
                     <td>
                         <a href="{{ url('element_show', {id: element.id}) }}" title="{{ 'action.show'|trans }}">
