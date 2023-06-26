@@ -5,8 +5,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Enum\UserRole;
 use App\Entity\User;
-use App\Form\Type\PasswordType;
+use App\Form\Type\EditPasswordType;
+use App\Form\Type\RegisterType;
 use App\Form\Type\UserType;
 use App\Service\UserServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -70,7 +72,7 @@ class UserController extends AbstractController
     {
 
         $form = $this->createForm(
-            PasswordType::class,
+            EditPasswordType::class,
             $user,
             [
                 'method' => 'PUT',
@@ -126,6 +128,38 @@ class UserController extends AbstractController
 
         return $this->render(
             'user/password.html.twig',
+            [
+                'form' => $form->createView(),
+                'user' => $user,
+            ]
+        );
+    }
+
+    #[Route('/register', name: 'register', methods: 'GET|POST')]
+    public function register(Request $request): Response
+    {
+        $user = new User();
+        $form = $this->createForm(
+            RegisterType::class,
+            $user,
+            ['action' => $this->generateUrl('register')]
+        );
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user->setRoles([UserRole::ROLE_USER->value]);
+            $this->userService->password($user);
+
+            $this->addFlash(
+                'success',
+                $this->translator->trans('message.created_successfully')
+            );
+
+            return $this->redirectToRoute('user_show');
+        }
+
+        return $this->render(
+            'user/register.html.twig',
             [
                 'form' => $form->createView(),
                 'user' => $user,
