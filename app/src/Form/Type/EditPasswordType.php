@@ -7,14 +7,14 @@ namespace App\Form\Type;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class PasswordType.
  */
-class PasswordType extends AbstractType
+class EditPasswordType extends AbstractType
 {
     /**
      * Builds the form.
@@ -31,7 +31,7 @@ class PasswordType extends AbstractType
     {
         $builder->add(
             'password',
-            TextType::class,
+            PasswordType::class,
             [
                 'label' => 'label.password',
                 'required' => true,
