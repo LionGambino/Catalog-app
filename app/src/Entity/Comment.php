@@ -3,8 +3,11 @@
 namespace App\Entity;
 
 use App\Repository\CommentRepository;
-use Doctrine\DBAL\Types\Types;
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
 #[ORM\Table(name: 'comments')]
@@ -15,10 +18,12 @@ class Comment
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[ORM\Column(type: 'text', nullable: true)]
     private ?string $content = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'datetime_immutable')]
+    #[Assert\Type(DateTimeImmutable::class)]
+    #[Gedmo\Timestampable(on: 'create')]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\ManyToOne]

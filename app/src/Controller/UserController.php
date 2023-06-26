@@ -155,7 +155,7 @@ class UserController extends AbstractController
                 $this->translator->trans('message.created_successfully')
             );
 
-            return $this->redirectToRoute('user_show');
+            return $this->redirectToRoute('element_index');
         }
 
         return $this->render(

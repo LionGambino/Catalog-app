@@ -21,18 +21,25 @@
             <dt>{{ 'label.tags'|trans }}</dt>
             <dd>
                 {% for tag in element.tags%}
-                    <span> {{ tag.title }} </span> |
-                {% endfor %}
-            </dd>
-            <dt>{{ 'label_comment'|trans }}</dt>
-            <dd>
-                {% for comment in comments%}
-                    {% if comment.element.id == element.id %}
-                    <p> {{ comment.content|markdown_to_html }} </p>
-                    {% endif %}
+                    <span class="border border-dark"> {{ tag.title }} </span>
                 {% endfor %}
             </dd>
         </dl>
+        <h2>{{ 'label_comments'|trans }}</h2>
+            {% for comment in comments%}
+                {% if comment.element.id == element.id %}
+                    <div class="comment">
+                    <p> {{ comment.user.email }}</p>
+                    <p> {{ comment.content|markdown_to_html }} </p>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        <p>
+            <a href="{{ url('comment_create', {id: element.id}) }}" title="{{ 'action.add_comment'|trans }}">
+                {{ 'action.add_comment'|trans }}
+            </a>
+        </p>
+
         <p>
             <a href="{{ url('element_index') }}" title="{{ 'action.back_to_list'|trans }}">
                 {{ 'action.back_to_list'|trans }}

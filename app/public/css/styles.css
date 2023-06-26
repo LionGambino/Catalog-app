@@ -20,3 +20,20 @@ form label {
     background-color: white;
     color: black;
 }
+
+.comment {
+    background-color: #e5e5e5;
+    border-radius: 10px;
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.border {
+    padding: 5px;
+    margin-top: 3px;
+    display: inline-block;
+    border-radius: 5px;
+}

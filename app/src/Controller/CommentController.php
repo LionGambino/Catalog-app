@@ -1,0 +1,84 @@
+<?php
+/**
+ * Comment controller.
+ */
+
+namespace App\Controller;
+
+use App\Entity\Comment;
+use App\Entity\Element;
+use App\Entity\User;
+use App\Form\Type\CommentType;
+use App\Service\CommentServiceInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
+
+/**
+ * Class CommentController.
+ */
+#[Route('/comment')]
+class CommentController extends AbstractController
+{
+    /**
+     * Comment service.
+     */
+    private CommentServiceInterface $commentService;
+
+    /**
+     * Translator.
+     */
+    private TranslatorInterface $translator;
+
+    /**
+     * Constructor.
+     *
+     * @param CommentServiceInterface $commentService Comment service
+     * @param TranslatorInterface  $translator  Translator
+     */
+    public function __construct(CommentServiceInterface $commentService, TranslatorInterface $translator)
+    {
+        $this->commentService = $commentService;
+        $this->translator = $translator;
+    }
+
+    /**
+     * Create action.
+     *
+     * @param Request $request HTTP request
+     * @param Element    $element    Element entity
+     *
+     * @return Response HTTP response
+     */
+    #[Route('/create/{id}', name: 'comment_create', methods: 'GET|POST', )]
+    public function create(Request $request, Element $element): Response
+    {
+        $comment = new Comment();
+        $comment->setElement($element);
+        $user = $this->getUser();
+        $comment->setUser($user);
+        $form = $this->createForm(
+            CommentType::class,
+            $comment,
+            ['action' => $this->generateUrl('comment_create', ['id' => $element->getId()])]
+        );
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->commentService->save($comment);
+
+            $this->addFlash(
+                'success',
+                $this->translator->trans('message.created_successfully')
+            );
+
+            return $this->redirectToRoute('element_show', array ('id' => $element->getId()));
+        }
+
+        return $this->render('comment/create.html.twig',  ['form' => $form->createView(),'element'=>$element]);
+    }
+
+
+}
