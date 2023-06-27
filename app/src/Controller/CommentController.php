@@ -11,6 +11,7 @@ use App\Entity\User;
 use App\Form\Type\CommentType;
 use App\Service\CommentServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -78,6 +79,48 @@ class CommentController extends AbstractController
         }
 
         return $this->render('comment/create.html.twig',  ['form' => $form->createView(),'element'=>$element]);
+    }
+
+    /**
+     * Delete action.
+     *
+     * @param Request $request HTTP request
+     * @param Comment    $comment    Comment entity
+     * @param Element    $element    Element entity
+     *
+     * @return Response HTTP response
+     */
+    #[Route('/{id}/delete/{element}', name: 'comment_delete', requirements: ['id' => '[1-9]\d*'], methods: 'GET|DELETE')]
+    public function delete(Request $request, Comment $comment, Element $element): Response
+    {
+        $form = $this->createForm(
+            FormType::class,
+            $comment,
+            [
+                'method' => 'DELETE',
+                'action' => $this->generateUrl('comment_delete', ['id' => $comment->getId(), 'element' => $element->getId()]),
+            ]
+        );
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->commentService->delete($comment);
+
+            $this->addFlash(
+                'success',
+                $this->translator->trans('message.deleted_successfully')
+            );
+
+            return $this->redirectToRoute('element_show', array ('id' => $element->getId()));
+        }
+
+        return $this->render(
+            'comment/delete.html.twig',
+            [
+                'form' => $form->createView(),
+                'comment' => $comment,
+            ]
+        );
     }
 
 
