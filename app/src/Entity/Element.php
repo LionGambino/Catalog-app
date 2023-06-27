@@ -82,8 +82,13 @@ class Element
     #[ORM\JoinTable(name: 'elements_tags')]
     private $tags;
 
+    /**
+     * Favourited.
+     *
+     * @var ArrayCollection<int, User>
+     */
     #[Assert\Valid]
-    #[ORM\ManyToMany(targetEntity: User::class, fetch: 'EXTRA_LAZY', orphanRemoval: true)]
+    #[ORM\ManyToMany(targetEntity: User::class, fetch: 'EXTRA_LAZY', orphanRemoval: false)]
     #[ORM\JoinTable(name: 'elements_favourited')]
     private Collection $favourited;
 

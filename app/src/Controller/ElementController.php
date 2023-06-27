@@ -215,6 +215,91 @@ class ElementController extends AbstractController
     }
 
     /**
+     * Add favourite action.
+     *
+     * @param Request $request HTTP request
+     * @param Element    $element    Element entity
+     *
+     * @return Response HTTP response
+     */
+    #[Route('/{id}/add_favourite', name: 'element_add_favourite', methods: 'GET|POST', )]
+    public function create_favourite(Request $request, Element $element): Response
+    {
+        $form = $this->createForm(
+            FormType::class,
+            $element,
+            [
+                'action' => $this->generateUrl('element_add_favourite', ['id' => $element->getId()]),
+            ]
+        );
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user = $this->getUser();
+            $element->addFavourited($user);
+            $this->elementService->save($element);
+
+            $this->addFlash(
+                'success',
+                $this->translator->trans('message.added_successfully')
+            );
+
+            return $this->redirectToRoute('element_favourited');
+        }
+
+        return $this->render(
+            'favourite/add.html.twig',
+            [
+                'form' => $form->createView(),
+                'element' => $element,
+            ]
+        );
+    }
+
+    /**
+     * Delete favourite action.
+     *
+     * @param Request $request HTTP request
+     * @param Element    $element    Element entity
+     *
+     * @return Response HTTP response
+     */
+    #[Route('/{id}/delete_favourite', name: 'element_delete_favourite', requirements: ['id' => '[1-9]\d*'], methods: 'GET|DELETE')]
+    public function delete_favourite(Request $request, Element $element): Response
+    {
+        $form = $this->createForm(
+            FormType::class,
+            $element,
+            [
+                'method' => 'DELETE',
+                'action' => $this->generateUrl('element_delete_favourite', ['id' => $element->getId()]),
+            ]
+        );
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user = $this->getUser();
+            $element->removeFavourited($user);
+            $this->elementService->save($element);
+
+            $this->addFlash(
+                'success',
+                $this->translator->trans('message.deleted_successfully')
+            );
+
+            return $this->redirectToRoute('element_favourited');
+        }
+
+        return $this->render(
+            'favourite/delete.html.twig',
+            [
+                'form' => $form->createView(),
+                'element' => $element,
+            ]
+        );
+    }
+
+    /**
      * Get filters from request.
      *
      * @param Request $request HTTP request
