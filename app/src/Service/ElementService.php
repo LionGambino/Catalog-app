@@ -39,17 +39,17 @@ class ElementService implements ElementServiceInterface
     /**
      * Constructor.
      *
-     * @param ElementRepository     $elementRepository Element repository
-     * @param PaginatorInterface $paginator      Paginator
-     * @param CategoryServiceInterface $categoryService Category service
-     * @param TagServiceInterface      $tagService      Tag service
+     * @param ElementRepository        $elementRepository Element repository
+     * @param PaginatorInterface       $paginator         Paginator
+     * @param CategoryServiceInterface $categoryService   Category service
+     * @param TagServiceInterface      $tagService        Tag service
      */
     public function __construct(
         ElementRepository $elementRepository,
         PaginatorInterface $paginator,
         CategoryServiceInterface $categoryService,
-        TagServiceInterface $tagService,)
-    {
+        TagServiceInterface $tagService,
+    ) {
         $this->elementRepository = $elementRepository;
         $this->paginator = $paginator;
         $this->categoryService = $categoryService;
@@ -59,7 +59,7 @@ class ElementService implements ElementServiceInterface
     /**
      * Get paginated list.
      *
-     * @param int $page Page number
+     * @param int                $page    Page number
      * @param array<string, int> $filters Filters array
      *
      * @return PaginationInterface<string, mixed> Paginated list
@@ -78,8 +78,8 @@ class ElementService implements ElementServiceInterface
     /**
      * Get paginated list for favourited.
      *
-     * @param int $page Page number
-     * @param User               $user  Favourited by user
+     * @param int                $page    Page number
+     * @param User               $user    Favourited by user
      * @param array<string, int> $filters Filters array
      *
      * @return PaginationInterface<string, mixed> Paginated list
@@ -89,7 +89,7 @@ class ElementService implements ElementServiceInterface
         $filters = $this->prepareFilters($filters);
 
         return $this->paginator->paginate(
-            $this->elementRepository->queryByFavourited($user,$filters),
+            $this->elementRepository->queryByFavourited($user, $filters),
             $page,
             ElementRepository::PAGINATOR_ITEMS_PER_PAGE
         );

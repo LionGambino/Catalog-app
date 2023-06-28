@@ -35,5 +35,4 @@ interface UserServiceInterface
      * @param User $user User entity
      */
     public function password(User $user): void;
-
 }

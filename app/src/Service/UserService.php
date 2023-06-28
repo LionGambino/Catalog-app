@@ -11,7 +11,6 @@ use Knp\Component\Pager\PaginatorInterface;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-
 /**
  * Class UserService.
  */
@@ -35,9 +34,9 @@ class UserService implements UserServiceInterface
     /**
      * Constructor.
      *
-     * @param UserRepository $userRepository User repository
+     * @param UserRepository              $userRepository User repository
      * @param UserPasswordHasherInterface $passwordHasher Password hasher
-     * @param PaginatorInterface $paginator      Paginator
+     * @param PaginatorInterface          $paginator      Paginator
      */
     public function __construct(UserRepository $userRepository, UserPasswordHasherInterface $passwordHasher, PaginatorInterface $paginator)
     {
@@ -81,7 +80,8 @@ class UserService implements UserServiceInterface
     {
         $user->setPassword(
             $this->passwordHasher->hashPassword(
-                $user, $user->getPassword()
+                $user,
+                $user->getPassword()
             )
         );
         $this->userRepository->save($user);

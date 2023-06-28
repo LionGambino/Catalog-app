@@ -17,7 +17,7 @@ interface ElementServiceInterface
     /**
      * Get paginated list.
      *
-     * @param int $page Page number
+     * @param int                $page    Page number
      * @param array<string, int> $filters Filters array
      *
      * @return PaginationInterface<string, mixed> Paginated list
@@ -27,8 +27,8 @@ interface ElementServiceInterface
     /**
      * Get paginated list for favourited.
      *
-     * @param int $page Page number
-     * @param User               $user  Favourited by user
+     * @param int                $page    Page number
+     * @param User               $user    Favourited by user
      * @param array<string, int> $filters Filters array
      *
      * @return PaginationInterface<string, mixed> Paginated list

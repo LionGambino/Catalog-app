@@ -50,7 +50,7 @@ class UserController extends AbstractController
      *
      * @param UserServiceInterface $userService User service
      * @param TranslatorInterface  $translator  Translator
-     * @param Security  $security    Security helper
+     * @param Security             $security    Security helper
      */
     public function __construct(UserServiceInterface $userService, TranslatorInterface $translator, Security $security)
     {
@@ -66,15 +66,15 @@ class UserController extends AbstractController
      *
      * @return Response HTTP response
      */
-    #[Route('/index',name: 'user_index', methods: 'GET')]
+    #[Route('/index', name: 'user_index', methods: 'GET')]
     public function index(Request $request): Response
     {
         if (!($this->security->isGranted('ROLE_ADMIN'))) {
-
             $this->addFlash(
                 'warning',
                 $this->translator->trans('message.access_denied')
             );
+
             return $this->redirectToRoute('element_index');
         }
         $pagination = $this->userService->getPaginatedList(
@@ -93,6 +93,7 @@ class UserController extends AbstractController
     public function show(): Response
     {
         $user = $this->getUser();
+
         return $this->render('user/show.html.twig', ['user' => $user]);
     }
 
@@ -107,8 +108,7 @@ class UserController extends AbstractController
     #[Route('/{id}/password', name: 'password_edit', requirements: ['id' => '[1-9]\d*'], methods: 'GET|PUT')]
     public function password_edit(Request $request, User $user): Response
     {
-        if ($this->canManage() or $this->getUser()==$user)
-        {
+        if ($this->canManage() or $this->getUser() == $user) {
             $form = $this->createForm(
                 EditPasswordType::class,
                 $user,
@@ -142,6 +142,7 @@ class UserController extends AbstractController
             'warning',
             $this->translator->trans('message.access_denied')
         );
+
         return $this->redirectToRoute('element_index');
     }
     /**
@@ -155,8 +156,7 @@ class UserController extends AbstractController
     #[Route('/{id}/edit', name: 'user_edit', requirements: ['id' => '[1-9]\d*'], methods: 'GET|PUT')]
     public function edit(Request $request, User $user): Response
     {
-        if ($this->canManage() or $this->getUser()==$user)
-        {
+        if ($this->canManage() or $this->getUser() == $user) {
             $form = $this->createForm(
                 UserType::class,
                 $user,
@@ -185,14 +185,13 @@ class UserController extends AbstractController
                     'user' => $user,
                 ]
             );
-
         }
         $this->addFlash(
             'warning',
             $this->translator->trans('message.access_denied')
         );
-        return $this->redirectToRoute('element_index');
 
+        return $this->redirectToRoute('element_index');
     }
     /**
      * Register user action.
@@ -241,5 +240,4 @@ class UserController extends AbstractController
     {
         return $this->security->isGranted('ROLE_ADMIN');
     }
-
 }

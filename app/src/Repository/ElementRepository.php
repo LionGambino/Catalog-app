@@ -76,7 +76,7 @@ class ElementRepository extends ServiceEntityRepository
     /**
      * Query elements by favourited.
      *
-     * @param User         $user    User entity
+     * @param User                  $user    User entity
      * @param array<string, object> $filters Filters
      *
      * @return QueryBuilder Query builder
@@ -168,5 +168,4 @@ class ElementRepository extends ServiceEntityRepository
 
         return $queryBuilder;
     }
-
 }

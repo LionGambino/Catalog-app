@@ -37,7 +37,8 @@ class CommentType extends AbstractType
                 'label' => 'label.content',
                 'required' => true,
                 'attr' => ['max_length' => 255],
-            ]);
+            ]
+        );
     }
 
     /**
