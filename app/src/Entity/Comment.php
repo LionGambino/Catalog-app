@@ -60,7 +60,7 @@ class Comment
     #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EXTRA_LAZY')]
     #[Assert\Type(User::class)]
     #[Assert\NotBlank]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(onDelete: 'CASCADE', nullable: false)]
     private ?User $user = null;
 
     /**
