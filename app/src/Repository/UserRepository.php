@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * User repository
+ */
 namespace App\Repository;
 
 use App\Entity\User;
@@ -11,6 +13,8 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 
 /**
+ * Class UserRepository.
+ *
  * @extends ServiceEntityRepository<User>
  *
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
@@ -64,12 +68,23 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     {
         return $queryBuilder ?? $this->createQueryBuilder('user');
     }
+
+    /**
+     * Save entity.
+     *
+     * @param User $user User entity
+     */
     public function save(User $user): void
     {
         $this->_em->persist($user);
         $this->_em->flush();
     }
 
+    /**
+     * Delete entity.
+     *
+     * @param User $user User entity
+     */
     public function remove(User $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);

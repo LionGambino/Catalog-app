@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * Tag repository
+ */
 namespace App\Repository;
 
 use App\Entity\Tag;
@@ -10,6 +12,8 @@ use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
+ * Class TagRepository.
+ *
  * @extends ServiceEntityRepository<Tag>
  *
  * @method Tag|null find($id, $lockMode = null, $lockVersion = null)

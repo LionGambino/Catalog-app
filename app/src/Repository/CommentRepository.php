@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * Comment repository.
+ */
 namespace App\Repository;
 
 use App\Entity\Comment;
@@ -7,6 +9,8 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
+ * Class CommentRepository.
+ *
  * @extends ServiceEntityRepository<Comment>
  *
  * @method Comment|null find($id, $lockMode = null, $lockVersion = null)

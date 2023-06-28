@@ -1,6 +1,6 @@
 <?php
 /**
- * Password type.
+ * EditPassword type.
  */
 
 namespace App\Form\Type;
@@ -12,7 +12,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class PasswordType.
+ * Class EditPasswordType.
  */
 class EditPasswordType extends AbstractType
 {

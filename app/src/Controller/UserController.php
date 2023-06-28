@@ -144,7 +144,14 @@ class UserController extends AbstractController
         );
         return $this->redirectToRoute('element_index');
     }
-
+    /**
+     * Edit user action.
+     *
+     * @param Request $request HTTP request
+     * @param User    $user    User entity
+     *
+     * @return Response HTTP response
+     */
     #[Route('/{id}/edit', name: 'user_edit', requirements: ['id' => '[1-9]\d*'], methods: 'GET|PUT')]
     public function edit(Request $request, User $user): Response
     {
@@ -187,7 +194,13 @@ class UserController extends AbstractController
         return $this->redirectToRoute('element_index');
 
     }
-
+    /**
+     * Register user action.
+     *
+     * @param Request $request HTTP request
+     *
+     * @return Response HTTP response
+     */
     #[Route('/register', name: 'register', methods: 'GET|POST')]
     public function register(Request $request): Response
     {
@@ -219,7 +232,11 @@ class UserController extends AbstractController
             ]
         );
     }
-
+    /**
+     * Checks if user can manage user data.
+     *
+     * @return bool Result
+     */
     private function canManage(): bool
     {
         return $this->security->isGranted('ROLE_ADMIN');
