@@ -44,12 +44,8 @@ class ElementService implements ElementServiceInterface
      * @param CategoryServiceInterface $categoryService   Category service
      * @param TagServiceInterface      $tagService        Tag service
      */
-    public function __construct(
-        ElementRepository $elementRepository,
-        PaginatorInterface $paginator,
-        CategoryServiceInterface $categoryService,
-        TagServiceInterface $tagService,
-    ) {
+    public function __construct(ElementRepository $elementRepository, PaginatorInterface $paginator, CategoryServiceInterface $categoryService, TagServiceInterface $tagService)
+    {
         $this->elementRepository = $elementRepository;
         $this->paginator = $paginator;
         $this->categoryService = $categoryService;

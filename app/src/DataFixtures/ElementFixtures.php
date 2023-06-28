@@ -6,11 +6,9 @@
 namespace App\DataFixtures;
 
 use App\Entity\Category;
-use App\Entity\Enum\ElementStatus;
 use App\Entity\Tag;
 use App\Entity\Element;
 use App\Entity\User;
-use DateTimeImmutable;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 /**
@@ -35,12 +33,12 @@ class ElementFixtures extends AbstractBaseFixtures implements DependentFixtureIn
             $element = new Element();
             $element->setTitle($this->faker->sentence);
             $element->setCreatedAt(
-                DateTimeImmutable::createFromMutable(
+                \DateTimeImmutable::createFromMutable(
                     $this->faker->dateTimeBetween('-100 days', '-1 days')
                 )
             );
             $element->setUpdatedAt(
-                DateTimeImmutable::createFromMutable(
+                \DateTimeImmutable::createFromMutable(
                     $this->faker->dateTimeBetween('-100 days', '-1 days')
                 )
             );
@@ -50,20 +48,20 @@ class ElementFixtures extends AbstractBaseFixtures implements DependentFixtureIn
 
             /** @var Tag $tag */
             $references = 0;
-            while (($references) < 3) {
+            while ($references < 3) {
                 $tag = $this->getRandomReference('tags');
                 $element->addTag($tag);
-                ;
-                $references = $references+1;
+
+                $references = $references + 1;
             }
 
             /** @var User $favourited */
             $references = 0;
-            while (($references) < 2) {
+            while ($references < 2) {
                 $favourited = $this->getRandomReference('users');
                 $element->addFavourited($favourited);
-                ;
-                $references = $references+1;
+
+                $references = $references + 1;
             }
 
             return $element;

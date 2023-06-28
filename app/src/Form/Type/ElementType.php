@@ -21,8 +21,6 @@ class ElementType extends AbstractType
 {
     /**
      * Tags data transformer.
-     *
-     * @var TagsDataTransformer
      */
     private TagsDataTransformer $tagsDataTransformer;
 

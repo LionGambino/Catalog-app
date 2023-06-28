@@ -35,8 +35,6 @@ class CommentController extends AbstractController
 
     /**
      * Security helper.
-     *
-     * @var Security
      */
     private Security $security;
 
@@ -44,8 +42,8 @@ class CommentController extends AbstractController
      * Constructor.
      *
      * @param CommentServiceInterface $commentService Comment service
-     * @param TranslatorInterface  $translator  Translator
-     * @param Security  $security    Security helper
+     * @param TranslatorInterface     $translator     Translator
+     * @param Security                $security       Security helper
      */
     public function __construct(CommentServiceInterface $commentService, TranslatorInterface $translator, Security $security)
     {
@@ -58,11 +56,11 @@ class CommentController extends AbstractController
      * Create action.
      *
      * @param Request $request HTTP request
-     * @param Element    $element    Element entity
+     * @param Element $element Element entity
      *
      * @return Response HTTP response
      */
-    #[Route('/create/{id}', name: 'comment_create', methods: 'GET|POST', )]
+    #[Route('/create/{id}', name: 'comment_create', methods: 'GET|POST')]
     public function create(Request $request, Element $element): Response
     {
         $comment = new Comment();
@@ -84,26 +82,25 @@ class CommentController extends AbstractController
                 $this->translator->trans('message.created_successfully')
             );
 
-            return $this->redirectToRoute('element_show', array ('id' => $element->getId()));
+            return $this->redirectToRoute('element_show', ['id' => $element->getId()]);
         }
 
-        return $this->render('comment/create.html.twig',  ['form' => $form->createView(),'element'=>$element]);
+        return $this->render('comment/create.html.twig', ['form' => $form->createView(), 'element' => $element]);
     }
 
     /**
      * Delete action.
      *
      * @param Request $request HTTP request
-     * @param Comment    $comment    Comment entity
-     * @param Element    $element    Element entity
+     * @param Comment $comment Comment entity
+     * @param Element $element Element entity
      *
      * @return Response HTTP response
      */
     #[Route('/{id}/delete/{element}', name: 'comment_delete', requirements: ['id' => '[1-9]\d*'], methods: 'GET|DELETE')]
     public function delete(Request $request, Comment $comment, Element $element): Response
     {
-        if ($this->security->isGranted('ROLE_ADMIN'))
-        {
+        if ($this->security->isGranted('ROLE_ADMIN')) {
             $form = $this->createForm(
                 FormType::class,
                 $comment,
@@ -122,7 +119,7 @@ class CommentController extends AbstractController
                     $this->translator->trans('message.deleted_successfully')
                 );
 
-                return $this->redirectToRoute('element_show', array ('id' => $element->getId()));
+                return $this->redirectToRoute('element_show', ['id' => $element->getId()]);
             }
 
             return $this->render(
@@ -137,8 +134,7 @@ class CommentController extends AbstractController
             'warning',
             $this->translator->trans('message.access_denied')
         );
+
         return $this->redirectToRoute('element_index');
     }
-
-
 }

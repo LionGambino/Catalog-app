@@ -24,7 +24,7 @@ class CommentService implements CommentServiceInterface
      *
      * @param CommentRepository $commentRepository Comment repository
      */
-    public function __construct(CommentRepository $commentRepository,)
+    public function __construct(CommentRepository $commentRepository)
     {
         $this->commentRepository = $commentRepository;
     }
@@ -48,6 +48,4 @@ class CommentService implements CommentServiceInterface
     {
         $this->commentRepository->delete($comment);
     }
-
-    }
-
+}

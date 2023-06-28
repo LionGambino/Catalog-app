@@ -38,7 +38,7 @@ class ElementController extends AbstractController
      * Constructor.
      *
      * @param ElementServiceInterface $elementService Element service
-     * @param TranslatorInterface  $translator  Translator
+     * @param TranslatorInterface     $translator     Translator
      */
     public function __construct(ElementServiceInterface $elementService, TranslatorInterface $translator)
     {
@@ -68,7 +68,8 @@ class ElementController extends AbstractController
     /**
      * Show action.
      *
-     * @param Element $element Element entity
+     * @param Element           $element           Element entity
+     * @param CommentRepository $commentRepository Comment repository
      *
      * @return Response HTTP response
      */
@@ -76,6 +77,7 @@ class ElementController extends AbstractController
     public function show(Element $element, CommentRepository $commentRepository): Response
     {
         $comments = $commentRepository->findAll();
+
         return $this->render('element/show.html.twig', ['element' => $element, 'comments' => $comments]);
     }
 
@@ -86,7 +88,7 @@ class ElementController extends AbstractController
      *
      * @return Response HTTP response
      */
-    #[Route('/favourite',name: 'element_favourited', methods: 'GET')]
+    #[Route('/favourite', name: 'element_favourited', methods: 'GET')]
     public function favourited(Request $request): Response
     {
         $filters = $this->getFilters($request);
@@ -108,7 +110,7 @@ class ElementController extends AbstractController
      *
      * @return Response HTTP response
      */
-    #[Route('/create', name: 'element_create', methods: 'GET|POST', )]
+    #[Route('/create', name: 'element_create', methods: 'GET|POST')]
     #[IsGranted('ROLE_ADMIN')]
     public function create(Request $request): Response
     {
@@ -131,14 +133,14 @@ class ElementController extends AbstractController
             return $this->redirectToRoute('element_index');
         }
 
-        return $this->render('element/create.html.twig',  ['form' => $form->createView()]);
+        return $this->render('element/create.html.twig', ['form' => $form->createView()]);
     }
 
     /**
      * Edit action.
      *
      * @param Request $request HTTP request
-     * @param Element    $element    Element entity
+     * @param Element $element Element entity
      *
      * @return Response HTTP response
      */
@@ -180,7 +182,7 @@ class ElementController extends AbstractController
      * Delete action.
      *
      * @param Request $request HTTP request
-     * @param Element    $element    Element entity
+     * @param Element $element Element entity
      *
      * @return Response HTTP response
      */
@@ -222,12 +224,12 @@ class ElementController extends AbstractController
      * Add favourite action.
      *
      * @param Request $request HTTP request
-     * @param Element    $element    Element entity
+     * @param Element $element Element entity
      *
      * @return Response HTTP response
      */
-    #[Route('/{id}/add_favourite', name: 'element_add_favourite', methods: 'GET|POST', )]
-    public function create_favourite(Request $request, Element $element): Response
+    #[Route('/{id}/add_favourite', name: 'element_add_favourite', methods: 'GET|POST')]
+    public function createFavourite(Request $request, Element $element): Response
     {
         $form = $this->createForm(
             FormType::class,
@@ -264,12 +266,12 @@ class ElementController extends AbstractController
      * Delete favourite action.
      *
      * @param Request $request HTTP request
-     * @param Element    $element    Element entity
+     * @param Element $element Element entity
      *
      * @return Response HTTP response
      */
     #[Route('/{id}/delete_favourite', name: 'element_delete_favourite', requirements: ['id' => '[1-9]\d*'], methods: 'GET|DELETE')]
-    public function delete_favourite(Request $request, Element $element): Response
+    public function deleteFavourite(Request $request, Element $element): Response
     {
         $form = $this->createForm(
             FormType::class,

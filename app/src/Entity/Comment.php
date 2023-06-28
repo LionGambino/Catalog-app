@@ -2,13 +2,13 @@
 /**
  * Comment entity.
  */
+
 namespace App\Entity;
 
 use App\Repository\CommentRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -20,8 +20,6 @@ class Comment
 {
     /**
      * Primary key.
-     *
-     * @var int|null
      */
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -30,8 +28,6 @@ class Comment
 
     /**
      * Content.
-     *
-     * @var string|null
      */
     #[ORM\Column(type: 'text', nullable: true)]
     #[Assert\NotBlank]
@@ -39,11 +35,9 @@ class Comment
 
     /**
      * Created at.
-     *
-     * @var DateTimeImmutable|null
      */
     #[ORM\Column(type: 'datetime_immutable')]
-    #[Assert\Type(DateTimeImmutable::class)]
+    #[Assert\Type(\DateTimeImmutable::class)]
     #[Gedmo\Timestampable(on: 'create')]
     private ?\DateTimeImmutable $createdAt = null;
 
@@ -93,6 +87,8 @@ class Comment
      * Setter for title.
      *
      * @param string $content Content
+     *
+     * @return Comment|null Comment Entity
      */
     public function setContent(string $content): self
     {
@@ -104,7 +100,7 @@ class Comment
     /**
      * Getter for created at.
      *
-     * @return DateTimeImmutable|null Created at
+     * @return \DateTimeImmutable|null Created at
      */
     public function getCreatedAt(): ?\DateTimeImmutable
     {
@@ -114,7 +110,9 @@ class Comment
     /**
      * Setter for created at.
      *
-     * @param DateTimeImmutable $createdAt Created at
+     * @param \DateTimeImmutable $createdAt Created at
+     *
+     * @return Comment|null Comment Entity
      */
     public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {
@@ -137,6 +135,8 @@ class Comment
      * Setter for category.
      *
      * @param Element|null $element Element
+     *
+     * @return Comment|null Comment Entity
      */
     public function setElement(?Element $element): self
     {
@@ -159,6 +159,8 @@ class Comment
      * Setter for user.
      *
      * @param User|null $user User
+     *
+     * @return Comment|null Comment Entity
      */
     public function setUser(?User $user): self
     {

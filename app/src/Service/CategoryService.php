@@ -38,6 +38,7 @@ class CategoryService implements CategoryServiceInterface
      *
      * @param CategoryRepository $categoryRepository Category repository
      * @param PaginatorInterface $paginator          Paginator
+     * @param ElementRepository  $elementRepository  Element repository
      */
     public function __construct(CategoryRepository $categoryRepository, PaginatorInterface $paginator, ElementRepository $elementRepository)
     {
@@ -61,6 +62,7 @@ class CategoryService implements CategoryServiceInterface
             CategoryRepository::PAGINATOR_ITEMS_PER_PAGE
         );
     }
+
     /**
      * Save entity.
      *
@@ -68,7 +70,7 @@ class CategoryService implements CategoryServiceInterface
      */
     public function save(Category $category): void
     {
-        if (null == $category->getId()) {
+        if (null === $category->getId()) {
             $category->setCreatedAt(new \DateTimeImmutable());
         }
         $category->setUpdatedAt(new \DateTimeImmutable());

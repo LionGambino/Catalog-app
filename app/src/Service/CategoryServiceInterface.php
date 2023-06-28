@@ -51,7 +51,6 @@ interface CategoryServiceInterface
      * @param int $id Category id
      *
      * @return Category|null Category entity
-     *
      */
     public function findOneById(int $id): ?Category;
 }

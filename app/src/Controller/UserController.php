@@ -12,14 +12,11 @@ use App\Form\Type\RegisterType;
 use App\Form\Type\UserType;
 use App\Service\UserServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Security\Core\Security;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Class UserController.
@@ -27,7 +24,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[Route('/user')]
 class UserController extends AbstractController
 {
-
     /**
      * User service.
      */
@@ -40,8 +36,6 @@ class UserController extends AbstractController
 
     /**
      * Security helper.
-     *
-     * @var Security
      */
     private Security $security;
 
@@ -69,7 +63,7 @@ class UserController extends AbstractController
     #[Route('/index', name: 'user_index', methods: 'GET')]
     public function index(Request $request): Response
     {
-        if (!($this->security->isGranted('ROLE_ADMIN'))) {
+        if (!$this->security->isGranted('ROLE_ADMIN')) {
             $this->addFlash(
                 'warning',
                 $this->translator->trans('message.access_denied')
@@ -106,9 +100,9 @@ class UserController extends AbstractController
      * @return Response HTTP response
      */
     #[Route('/{id}/password', name: 'password_edit', requirements: ['id' => '[1-9]\d*'], methods: 'GET|PUT')]
-    public function password_edit(Request $request, User $user): Response
+    public function passwordEdit(Request $request, User $user): Response
     {
-        if ($this->canManage() or $this->getUser() == $user) {
+        if ($this->canManage() or $this->getUser() === $user) {
             $form = $this->createForm(
                 EditPasswordType::class,
                 $user,
@@ -145,6 +139,7 @@ class UserController extends AbstractController
 
         return $this->redirectToRoute('element_index');
     }
+
     /**
      * Edit user action.
      *
@@ -156,7 +151,7 @@ class UserController extends AbstractController
     #[Route('/{id}/edit', name: 'user_edit', requirements: ['id' => '[1-9]\d*'], methods: 'GET|PUT')]
     public function edit(Request $request, User $user): Response
     {
-        if ($this->canManage() or $this->getUser() == $user) {
+        if ($this->canManage() or $this->getUser() === $user) {
             $form = $this->createForm(
                 UserType::class,
                 $user,
@@ -193,6 +188,7 @@ class UserController extends AbstractController
 
         return $this->redirectToRoute('element_index');
     }
+
     /**
      * Register user action.
      *
@@ -231,6 +227,7 @@ class UserController extends AbstractController
             ]
         );
     }
+
     /**
      * Checks if user can manage user data.
      *

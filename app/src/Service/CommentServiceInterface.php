@@ -12,7 +12,6 @@ use App\Entity\Comment;
  */
 interface CommentServiceInterface
 {
-
     /**
      * Save entity.
      *
