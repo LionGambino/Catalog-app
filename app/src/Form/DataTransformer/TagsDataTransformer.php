@@ -51,7 +51,7 @@ class TagsDataTransformer implements DataTransformerInterface
             $tagTitles[] = $tag->getTitle();
         }
 
-        return implode(', ', $tagTitles);
+        return implode(',', $tagTitles);
     }
 
     /**
