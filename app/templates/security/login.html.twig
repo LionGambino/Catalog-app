@@ -35,11 +35,11 @@
         </div>
     #}
 
-    <button class="btn btn-lg btn-primary" type="submit">
+    <button class="btn btn-lg btn-primary my-2" type="submit">
         {{ 'action_login'|trans }}
     </button>
 </form>
-    <a href="{{ url('register') }}" title="{{ 'action.register'|trans }}">
+    <a class="btn btn-sm btn-outline-secondary" href="{{ url('register') }}" title="{{ 'action.register'|trans }}">
         {{ 'action.register'|trans }}
     </a>
 {% endblock %}

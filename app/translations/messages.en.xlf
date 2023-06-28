@@ -150,6 +150,10 @@
         <source>title.element_delete</source>
         <target>Delete element</target>
       </trans-unit>
+        <trans-unit id="title.favourite_list">
+          <source>title.favourite_list</source>
+          <target>Favuorite list</target>
+        </trans-unit>
       <trans-unit id="title.element_add_favourite">
         <source>title.element_add_favourite</source>
         <target>Add element to favourite</target>

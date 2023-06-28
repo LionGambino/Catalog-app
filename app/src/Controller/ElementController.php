@@ -98,7 +98,7 @@ class ElementController extends AbstractController
             $filters
         );
 
-        return $this->render('element/index.html.twig', ['pagination' => $pagination]);
+        return $this->render('favourite/index.html.twig', ['pagination' => $pagination]);
     }
 
     /**

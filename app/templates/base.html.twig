@@ -13,38 +13,40 @@
     {% endblock %}
 </head>
 <body>
-    <nav class="navbar navbar-light" style="background-color: #FF7F50FF;">
+    <nav class="navbar navbar-light">
     <div>
         <ul class="nav">
-            <li>
-                <a class="nav-item h1" href="{{ url('element_index')}}">{{ 'title.internet_catalog'|trans }}</a>
-            </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ url('element_favourited')}}">{{ 'nav.favourited'|trans }}</a>
+                <a class="h1 logo" href="{{ url('element_index')}}">{{ 'title.internet_catalog'|trans }}</a>
             </li>
-            {% if is_granted('ROLE_ADMIN') %}
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('category_index')}}">{{ 'nav.categories'|trans }}</a>
+                    <a class="btn btn-outline-light btn-lg" href="{{ url('element_favourited')}}">{{ 'nav.favourited'|trans }}</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url('tag_index')}}">{{ 'nav.tags'|trans }}</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url('user_index')}}">{{ 'nav.users'|trans }}</a>
-                </li>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li class="nav-item">
+                        <a class="btn btn-outline-light btn-lg" href="{{ url('category_index')}}">{{ 'nav.categories'|trans }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-light btn-lg" href="{{ url('tag_index')}}">{{ 'nav.tags'|trans }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-light btn-lg" href="{{ url('user_index')}}">{{ 'nav.users'|trans }}</a>
+                    </li>
+                {% endif %}
             {% endif %}
         </ul>
     </div>
         <div>
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                <a class="btn btn-outline-dark" href="{{ url('user_show')}}">{{ app.user.email }}</a>
-                <a class="btn btn-outline-dark" href="{{ url('app_logout') }}">{{ 'action_logout'|trans }}</a>
+                <a class="btn btn-light btn-lg" href="{{ url('user_show')}}">{{ app.user.email }}</a>
+                <a class="btn btn-danger btn-lg" href="{{ url('app_logout') }}">{{ 'action_logout'|trans }}</a>
             {% else %}
-                <a class="btn btn-outline-dark" href="{{ url('app_login') }}">{{ 'action_login'|trans }}</a>
+                <a class="btn btn-light btn-lg" href="{{ url('app_login') }}">{{ 'action_login'|trans }}</a>
             {% endif %}
         </div>
     </nav>
-    <main role="main" class="container-fluid">
+    <main role="main">
         <div class="container-fluid">
             {% include 'default/_flash_messages.html.twig' %}
             {% block body %}{% endblock %}

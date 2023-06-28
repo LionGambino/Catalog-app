@@ -11,9 +11,11 @@
         <div class="navigation text-center">
             {{ knp_pagination_render(pagination) }}
         </div>
-        <a href="{{ url('category_create') }}" title="{{ 'action_create'|trans }}">
+        <div class="w-100 text-center justify-content-center">
+        <a class="btn btn-success btn-block w-25" href="{{ url('category_create') }}" title="{{ 'action_create'|trans }}">
             {{ 'action_create'|trans }}
         </a>
+        </div>
         <table class="table table-striped">
             <thead>
             <tr>
@@ -32,17 +34,17 @@
                     <td>{{ category.updatedAt|format_date('long') }}</td>
                     <td>{{ category.title }}</td>
                     <td>
-                        <a href="{{ url('category_show', {id: category.id}) }}" title="{{ 'action.show'|trans }}">
+                        <a class="btn btn-primary" href="{{ url('category_show', {id: category.id}) }}" title="{{ 'action.show'|trans }}">
                             {{ 'action.show'|trans }}
                         </a>
                     </td>
                     <td>
-                        <a href="{{ url('category_edit', {id: category.id}) }}" title="{{ 'action.edit'|trans }}">
+                        <a class="btn btn-info" href="{{ url('category_edit', {id: category.id}) }}" title="{{ 'action.edit'|trans }}">
                             {{ 'action.edit'|trans }}
                         </a>
                     </td>
                     <td>
-                        <a href="{{ url('category_delete', {id: category.id}) }}" title="{{ 'action.delete'|trans }}">
+                        <a class="btn btn-danger" href="{{ url('category_delete', {id: category.id}) }}" title="{{ 'action.delete'|trans }}">
                             {{ 'action.delete'|trans }}
                         </a>
                     </td>

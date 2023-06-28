@@ -8,8 +8,6 @@
     <h1>{{ 'title.element_details'|trans({'%id%': element.id|default('')}) }}</h1>
     {% if element is defined and element|length %}
         <dl class="dl-horizontal">
-            <dt>{{ 'label.id'|trans }}</dt>
-            <dd>{{ element.id }}</dd>
             <dt>{{ 'label.created_at'|trans }}</dt>
             <dd>{{ element.createdAt|format_date('long') }}</dd>
             <dt>{{ 'label.updated_at'|trans }}</dt>
@@ -29,24 +27,29 @@
             {% for comment in comments%}
                 {% if comment.element.id == element.id %}
                     <div class="comment">
-                    <p> {{ comment.user.email }}</p>
-                    <p> {{ comment.content|markdown_to_html }} </p>
-                    <p>
-                        <a href="{{ url('comment_delete', {id: comment.id, element: comment.element.id}) }}" title="{{ 'action.delete'|trans }}">
-                            {{ 'action.delete'|trans }}
-                        </a>
-                    </p>
+                        <p>
+                            <span style="font-weight: bold"> {{ comment.user.email }} </span>
+                            <span class="text-secondary"> {{ comment.createdAt|format_date('long') }}</span>
+                        </p>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <p class="delete">
+                                <a class="text-danger" href="{{ url('comment_delete', {id: comment.id, element: comment.element.id}) }}" title="{{ 'action.delete'|trans }}">
+                                    {{ 'action.delete'|trans }}
+                                </a>
+                            </p>
+                        {% endif %}
+                    {{ comment.content|markdown_to_html }}
                     </div>
                 {% endif %}
             {% endfor %}
         <p>
-            <a href="{{ url('comment_create', {id: element.id}) }}" title="{{ 'action.add_comment'|trans }}">
+            <a class="btn btn-success" href="{{ url('comment_create', {id: element.id}) }}" title="{{ 'action.add_comment'|trans }}">
                 {{ 'action.add_comment'|trans }}
             </a>
         </p>
 
         <p>
-            <a href="{{ url('element_index') }}" title="{{ 'action.back_to_list'|trans }}">
+            <a class="btn btn-outline-secondary" href="{{ url('element_index') }}" title="{{ 'action.back_to_list'|trans }}">
                 {{ 'action.back_to_list'|trans }}
             </a>
         </p>

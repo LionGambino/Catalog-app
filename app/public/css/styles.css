@@ -1,8 +1,47 @@
 form label {
     font-weight: bold;
 }
+.navbar {
+    background-color: black;
+}
+
+.navbar div{
+    margin: 5px;
+}
+
+.nav * {
+    margin: 2px;
+}
+
+.logo{
+    text-decoration: none;
+    color: #ffcc00;
+}
+
+.logo:hover{
+    color: #ffcc00;
+}
+
+body {
+    background-color: #282828;
+    justify-content: center;
+}
+
+main {
+    background-color: white;
+    width: 80%;
+    border-radius: 10px;
+    min-height: 1080px;
+    margin: 30px auto;
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
 
 .comment {
+    word-wrap: break-word;
+    position: relative;
+    padding: 10px;
+    width: 100%;
     background-color: #e5e5e5;
     border-radius: 10px;
     border-style: solid;
@@ -12,9 +51,31 @@ form label {
     margin-bottom: 10px;
 }
 
+.comment .delete{
+    position: absolute;
+    right: 2%;
+    top: 10px;
+    text-align: right;
+}
+
+.comment p {
+    width: 100%;
+}
+
 .border {
     padding: 5px;
     margin-top: 3px;
     display: inline-block;
     border-radius: 5px;
+}
+
+#element input, #category input, #tag input {
+    margin: 5px;
+    width: 50%;
+}
+
+#comment textarea {
+    margin: 5px;
+    width: 100%;
+    min-height: 100px;
 }
