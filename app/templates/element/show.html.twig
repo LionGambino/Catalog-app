@@ -32,8 +32,8 @@
                     <p> {{ comment.user.email }}</p>
                     <p> {{ comment.content|markdown_to_html }} </p>
                     <p>
-                        <a href="{{ url('comment_delete', {id: comment.id, element: comment.element.id}) }}" title="{{ 'action.delete_comment'|trans }}">
-                            {{ 'action.delete_comment'|trans }}
+                        <a href="{{ url('comment_delete', {id: comment.id, element: comment.element.id}) }}" title="{{ 'action.delete'|trans }}">
+                            {{ 'action.delete'|trans }}
                         </a>
                     </p>
                     </div>
