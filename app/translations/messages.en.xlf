@@ -2,6 +2,34 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="en" datatype="plaintext" original="file.ext">
     <body>
+        <trans-unit id="title.internet_catalog">
+          <source>title.internet_catalog</source>
+          <target>Internet Catalog</target>
+        </trans-unit>
+        <trans-unit id="nav.favourited">
+          <source>nav.favourited</source>
+          <target>Favourite</target>
+        </trans-unit>
+        <trans-unit id="nav.categories">
+          <source>nav.categories</source>
+          <target>Categories</target>
+        </trans-unit>
+        <trans-unit id="nav.tags">
+          <source>nav.tags</source>
+          <target>Tags</target>
+        </trans-unit>
+        <trans-unit id="nav.users">
+          <source>nav.users</source>
+          <target>Users</target>
+        </trans-unit>
+        <trans-unit id="label.email">
+        <source>label.email</source>
+        <target>Email</target>
+        </trans-unit>
+        <trans-unit id="label.password">
+          <source>label.password</source>
+          <target>Password</target>
+        </trans-unit>
       <trans-unit id="label.actions">
         <source>label.actions</source>
         <target>Actions</target>
@@ -18,29 +46,233 @@
         <source>label.content</source>
         <target>Content</target>
       </trans-unit>
+      <trans-unit id="label.created_at">
+        <source>label.created_at</source>
+        <target>Created At</target>
+      </trans-unit>
+        <trans-unit id="label.updated_at">
+          <source>label.updated_at</source>
+          <target>Updated At</target>
+        </trans-unit>
+        <trans-unit id="label.category">
+          <source>label.category</source>
+          <target>Category</target>
+        </trans-unit>
       <trans-unit id="label.tags">
         <source>label.tags</source>
         <target>Tags</target>
       </trans-unit>
+      <trans-unit id="label_comments">
+        <source>label_comments</source>
+        <target>Comments</target>
+      </trans-unit>
+      <trans-unit id="label.none">
+        <source>label.none</source>
+        <target>None</target>
+      </trans-unit>
+      <trans-unit id="action_login">
+        <source>action_login</source>
+        <target>Log in</target>
+      </trans-unit>
+      <trans-unit id="action.register">
+        <source>action.register</source>
+        <target>Register</target>
+      </trans-unit>
+      <trans-unit id="action_logout">
+        <source>action_logout</source>
+        <target>Logout</target>
+      </trans-unit>
+      <trans-unit id="action.user_edit">
+        <source>action.user_edit</source>
+        <target>Edit user</target>
+      </trans-unit>
+      <trans-unit id="action.password_edit">
+        <source>action.password_edit</source>
+        <target>Edit password</target>
+      </trans-unit>
+        <trans-unit id="action.show">
+          <source>action.show</source>
+          <target>Show</target>
+        </trans-unit>
+        <trans-unit id="action_create">
+          <source>action_create</source>
+          <target>Create</target>
+        </trans-unit>
+        <trans-unit id="action.edit">
+          <source>action.edit</source>
+          <target>Edit</target>
+        </trans-unit>
+        <trans-unit id="action.delete">
+          <source>action.delete</source>
+          <target>Delete</target>
+        </trans-unit>
+        <trans-unit id="action.add_favourite">
+          <source>action.add_favourite</source>
+          <target>Add to favourite</target>
+        </trans-unit>
+        <trans-unit id="action.delete_favourite">
+          <source>action.delete_favourite</source>
+          <target>Delete from favourite</target>
+        </trans-unit>
+        <trans-unit id="action.add_comment">
+          <source>action.add_comment</source>
+          <target>Add comment</target>
+        </trans-unit>
+        <trans-unit id="action.back_to_list">
+          <source>action.back_to_list</source>
+          <target>Back to list</target>
+        </trans-unit>
+        <trans-unit id="action.save">
+          <source>action.save</source>
+          <target>Save</target>
+        </trans-unit>
+      <trans-unit id="title.sign_in">
+        <source>title.sign_in</source>
+        <target>Sign in</target>
+      </trans-unit>
+      <trans-unit id="title.element_list">
+        <source>title.element_list</source>
+        <target>Elements list</target>
+      </trans-unit>
+        <trans-unit id="title.element_details">
+            <source>title.element_details</source>
+            <target>Element details #%id%</target>
+        </trans-unit>
+      <trans-unit id="title.element_create">
+        <source>title.element_create</source>
+        <target>Create element</target>
+      </trans-unit>
+      <trans-unit id="title.element_edit">
+        <source>title.element_edit</source>
+        <target>Edit element</target>
+      </trans-unit>
+      <trans-unit id="title.element_delete">
+        <source>title.element_delete</source>
+        <target>Delete element</target>
+      </trans-unit>
+      <trans-unit id="title.element_add_favourite">
+        <source>title.element_add_favourite</source>
+        <target>Add element to favourite</target>
+      </trans-unit>
+      <trans-unit id="title.element_delete_favourite">
+        <source>title.element_delete_favourite</source>
+        <target>Delete element from favourite</target>
+      </trans-unit>
+        <trans-unit id="title.category_list">
+          <source>title.category_list</source>
+          <target>Category list</target>
+        </trans-unit>
+        <trans-unit id="title.category_details">
+          <source>title.category_details</source>
+          <target>Category details #%id%</target>
+        </trans-unit>
+        <trans-unit id="title.category_create">
+          <source>title.category_create</source>
+          <target>Create category</target>
+        </trans-unit>
+        <trans-unit id="title.category_edit">
+          <source>title.category_edit</source>
+          <target>Edit category</target>
+        </trans-unit>
+        <trans-unit id="title.category_delete">
+          <source>title.category_delete</source>
+          <target>Delete category</target>
+        </trans-unit>
+        <trans-unit id="title.tag_list">
+          <source>title.tag_list</source>
+          <target>Tags list</target>
+        </trans-unit>
+        <trans-unit id="title.tag_details">
+          <source>title.tag_details</source>
+          <target>Tag details #%id%</target>
+        </trans-unit>
+        <trans-unit id="title.tag_create">
+          <source>title.tag_create</source>
+          <target>Create tag</target>
+        </trans-unit>
+        <trans-unit id="title.tag_edit">
+          <source>title.tag_edit</source>
+          <target>Edit tag</target>
+        </trans-unit>
+        <trans-unit id="title.tag_delete">
+          <source>title.tag_delete</source>
+          <target>Delete tag</target>
+        </trans-unit>
+        <trans-unit id="title.comment_create">
+          <source>title.comment_create</source>
+          <target>Add comment</target>
+        </trans-unit>
+        <trans-unit id="title.comment_delete">
+          <source>title.comment_delete</source>
+          <target>Delete comment</target>
+        </trans-unit>
+        <trans-unit id="title.user_list">
+          <source>title.user_list</source>
+          <target>Users list</target>
+        </trans-unit>
+        <trans-unit id="title.user_details">
+          <source>title.user_details</source>
+          <target>User profile</target>
+        </trans-unit>
+        <trans-unit id="title.user_register">
+          <source>title.user_register</source>
+          <target>Register</target>
+        </trans-unit>
+        <trans-unit id="title.user_edit">
+          <source>title.user_edit</source>
+          <target>Edit user</target>
+        </trans-unit>
+        <trans-unit id="title.password_edit">
+          <source>title.password_edit</source>
+          <target>Edit password </target>
+        </trans-unit>
+      <trans-unit id="link.back">
+        <source>link.back</source>
+        <target>Back</target>
+      </trans-unit>
+      <trans-unit id="link.view">
+        <source>link.view</source>
+        <target>View</target>
+      </trans-unit>
       <trans-unit id="message.empty_list">
         <source>message.empty_list</source>
-        <target>List is empty.</target>
+        <target>Empty list</target>
       </trans-unit>
       <trans-unit id="message.record_not_found">
         <source>message.record_not_found</source>
-        <target>Record not found.</target>
+        <target>Record not found</target>
       </trans-unit>
-      <trans-unit id="title.record_list">
-        <source>title.record_list</source>
-        <target>Records list</target>
+      <trans-unit id="message.created_successfully">
+        <source>message.created_successfully</source>
+        <target>Created successfully</target>
       </trans-unit>
-      <trans-unit id="title.record_view">
-        <source>title.record_view</source>
-        <target>Record view #%id%</target>
+      <trans-unit id="message.updated_successfully">
+        <source>message.updated_successfully</source>
+        <target>Updated successfully</target>
       </trans-unit>
-      <trans-unit id="title.element_details">
-          <source>title.element_details</source>
-          <target>Element details #%id%</target>
+      <trans-unit id="message.category_contains_elements">
+        <source>message.category_contains_elements</source>
+        <target>Category contains elements</target>
+      </trans-unit>
+      <trans-unit id="message.deleted_successfully">
+        <source>message.deleted_successfully</source>
+        <target>Deleted successfully</target>
+      </trans-unit>
+      <trans-unit id="message.edited_successfully">
+        <source>message.edited_successfully</source>
+        <target>Edited successfully</target>
+      </trans-unit>
+      <trans-unit id="message.added_successfully">
+        <source>message.added_successfully</source>
+        <target>Added successfully</target>
+      </trans-unit>
+      <trans-unit id="message.access_denied">
+        <source>message.access_denied</source>
+        <target>Access denied</target>
+      </trans-unit>
+      <trans-unit id="message.form_error">
+        <source>message.form_error</source>
+        <target>Form error</target>
       </trans-unit>
     </body>
   </file>
