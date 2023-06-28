@@ -14,6 +14,14 @@
             <dd>{{ user.email }}</dd>
         </dl>
         <p>
+            <a href="{{ url('user_edit', {id: user.id}) }}" title="{{ 'action.user_edit'|trans }}">
+                {{ 'action.user_edit'|trans }}
+            </a>
+            <a href="{{ url('password_edit', {id: user.id}) }}" title="{{ 'action.password_edit'|trans }}">
+                {{ 'action.password_edit'|trans }}
+            </a>
+        </p>
+        <p>
             <a href="{{ url('element_index') }}" title="{{ 'action.back_to_list'|trans }}">
                 {{ 'action.back_to_list'|trans }}
             </a>

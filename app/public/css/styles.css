@@ -2,25 +2,6 @@ form label {
     font-weight: bold;
 }
 
-#navbar {
-    background-color: coral;
-    color: white;
-    margin-bottom: 10px;
-    text-align: right;
-}
-
-#navbar div{
-    display: inline-block;
-    padding: 5px;
-    border: black;
-    border-style: solid;
-}
-
-#navbar div:hover{
-    background-color: white;
-    color: black;
-}
-
 .comment {
     background-color: #e5e5e5;
     border-radius: 10px;

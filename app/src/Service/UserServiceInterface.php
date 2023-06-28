@@ -6,12 +6,21 @@
 namespace App\Service;
 
 use App\Entity\User;
+use Knp\Component\Pager\Pagination\PaginationInterface;
 
 /**
  * Interface UserServiceInterface.
  */
 interface UserServiceInterface
 {
+    /**
+     * Get paginated list.
+     *
+     * @param int $page Page number
+     *
+     * @return PaginationInterface<string, mixed> Paginated list
+     */
+    public function getPaginatedList(int $page): PaginationInterface;
 
     /**
      * Save entity.
@@ -20,6 +29,11 @@ interface UserServiceInterface
      */
     public function save(User $user): void;
 
+    /**
+     * Save password entity.
+     *
+     * @param User $user User entity
+     */
     public function password(User $user): void;
 
 }
