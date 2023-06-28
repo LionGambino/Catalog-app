@@ -10,6 +10,7 @@ use App\Entity\User;
 use App\Form\Type\ElementType;
 use App\Repository\CommentRepository;
 use App\Service\ElementServiceInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
@@ -108,6 +109,7 @@ class ElementController extends AbstractController
      * @return Response HTTP response
      */
     #[Route('/create', name: 'element_create', methods: 'GET|POST', )]
+    #[IsGranted('ROLE_ADMIN')]
     public function create(Request $request): Response
     {
         $element = new Element();
@@ -141,6 +143,7 @@ class ElementController extends AbstractController
      * @return Response HTTP response
      */
     #[Route('/{id}/edit', name: 'element_edit', requirements: ['id' => '[1-9]\d*'], methods: 'GET|PUT')]
+    #[IsGranted('ROLE_ADMIN')]
     public function edit(Request $request, Element $element): Response
     {
         $form = $this->createForm(
@@ -182,6 +185,7 @@ class ElementController extends AbstractController
      * @return Response HTTP response
      */
     #[Route('/{id}/delete', name: 'element_delete', requirements: ['id' => '[1-9]\d*'], methods: 'GET|DELETE')]
+    #[IsGranted('ROLE_ADMIN')]
     public function delete(Request $request, Element $element): Response
     {
         $form = $this->createForm(
