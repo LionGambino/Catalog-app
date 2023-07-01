@@ -25,7 +25,7 @@
                 <th>{{ knp_pagination_sortable(pagination, 'label.created_at'|trans, 'element.createdAt') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.updated_at'|trans, 'element.updatedAt') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.title'|trans, 'element.title') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'label.category'|trans, 'element.category.title') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.category'|trans, 'category.title') }}</th>
                 <th>{{ 'label.tags'|trans }}</th>
                 <th colspan="
                 {% if is_granted('ROLE_ADMIN') %}
