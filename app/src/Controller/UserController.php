@@ -11,6 +11,7 @@ use App\Form\Type\EditPasswordType;
 use App\Form\Type\RegisterType;
 use App\Form\Type\UserType;
 use App\Service\UserServiceInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -100,44 +101,37 @@ class UserController extends AbstractController
      * @return Response HTTP response
      */
     #[Route('/{id}/password', name: 'password_edit', requirements: ['id' => '[1-9]\d*'], methods: 'GET|PUT')]
+    #[IsGranted('EDIT', subject: 'user')]
     public function passwordEdit(Request $request, User $user): Response
     {
-        if ($this->canManage() or $this->getUser() === $user) {
-            $form = $this->createForm(
-                EditPasswordType::class,
-                $user,
-                [
-                    'method' => 'PUT',
-                    'action' => $this->generateUrl('password_edit', ['id' => $user->getId()]),
-                ]
-            );
-            $form->handleRequest($request);
-
-            if ($form->isSubmitted() && $form->isValid()) {
-                $this->userService->password($user);
-
-                $this->addFlash(
-                    'success',
-                    $this->translator->trans('message.edited_successfully')
-                );
-
-                return $this->redirectToRoute('user_show');
-            }
-
-            return $this->render(
-                'user/password.html.twig',
-                [
-                    'form' => $form->createView(),
-                    'user' => $user,
-                ]
-            );
-        }
-        $this->addFlash(
-            'warning',
-            $this->translator->trans('message.access_denied')
+        $form = $this->createForm(
+            EditPasswordType::class,
+            $user,
+            [
+                'method' => 'PUT',
+                'action' => $this->generateUrl('password_edit', ['id' => $user->getId()]),
+            ]
         );
+        $form->handleRequest($request);
 
-        return $this->redirectToRoute('element_index');
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->userService->password($user);
+
+            $this->addFlash(
+                'success',
+                $this->translator->trans('message.edited_successfully')
+            );
+
+            return $this->redirectToRoute('user_show');
+        }
+
+        return $this->render(
+            'user/password.html.twig',
+            [
+                'form' => $form->createView(),
+                'user' => $user,
+            ]
+        );
     }
 
     /**
@@ -149,44 +143,37 @@ class UserController extends AbstractController
      * @return Response HTTP response
      */
     #[Route('/{id}/edit', name: 'user_edit', requirements: ['id' => '[1-9]\d*'], methods: 'GET|PUT')]
+    #[IsGranted('EDIT', subject: 'user')]
     public function edit(Request $request, User $user): Response
     {
-        if ($this->canManage() or $this->getUser() === $user) {
-            $form = $this->createForm(
-                UserType::class,
-                $user,
-                [
-                    'method' => 'PUT',
-                    'action' => $this->generateUrl('user_edit', ['id' => $user->getId()]),
-                ]
-            );
-            $form->handleRequest($request);
-
-            if ($form->isSubmitted() && $form->isValid()) {
-                $this->userService->save($user);
-
-                $this->addFlash(
-                    'success',
-                    $this->translator->trans('message.edited_successfully')
-                );
-
-                return $this->redirectToRoute('user_show');
-            }
-
-            return $this->render(
-                'user/edit.html.twig',
-                [
-                    'form' => $form->createView(),
-                    'user' => $user,
-                ]
-            );
-        }
-        $this->addFlash(
-            'warning',
-            $this->translator->trans('message.access_denied')
+        $form = $this->createForm(
+            UserType::class,
+            $user,
+            [
+                'method' => 'PUT',
+                'action' => $this->generateUrl('user_edit', ['id' => $user->getId()]),
+            ]
         );
+        $form->handleRequest($request);
 
-        return $this->redirectToRoute('element_index');
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->userService->save($user);
+
+            $this->addFlash(
+                'success',
+                $this->translator->trans('message.edited_successfully')
+            );
+
+            return $this->redirectToRoute('user_show');
+        }
+
+        return $this->render(
+            'user/edit.html.twig',
+            [
+                'form' => $form->createView(),
+                'user' => $user,
+            ]
+        );
     }
 
     /**
@@ -226,15 +213,5 @@ class UserController extends AbstractController
                 'user' => $user,
             ]
         );
-    }
-
-    /**
-     * Checks if user can manage user data.
-     *
-     * @return bool Result
-     */
-    private function canManage(): bool
-    {
-        return $this->security->isGranted('ROLE_ADMIN');
     }
 }
