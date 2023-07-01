@@ -91,7 +91,8 @@ class UserVoter extends Voter
     /**
      * Checks if user can edit task.
      *
-     * @param User $user User
+     * @param User $user    User
+     * @param User $manager User
      *
      * @return bool Result
      */
@@ -103,7 +104,8 @@ class UserVoter extends Voter
     /**
      * Checks if user can view task.
      *
-     * @param User $user User
+     * @param User $user    User
+     * @param User $manager User
      *
      * @return bool Result
      */
